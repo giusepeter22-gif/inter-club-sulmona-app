@@ -1,14 +1,5 @@
 [build]
-  publish = "."
-  functions = "netlify/functions"
-  command = "npm install"
+publish = "."
 
-[[redirects]]
-  from = "/.netlify/functions/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+[functions]
+directory = "netlify/functions"
