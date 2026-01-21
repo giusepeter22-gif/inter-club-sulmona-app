@@ -1,0 +1,6 @@
+# IMPORTANT:
+# Do NOT rewrite Netlify Functions.
+/.netlify/functions/*  /.netlify/functions/:splat  200
+
+# SPA fallback
+/*    /index.html   200

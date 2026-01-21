@@ -1,0 +1,481 @@
+:root{
+  --bg:#0B0B0B;
+  --card:#151515;
+  --card2:#111111;
+  --text:#F3F6FF;
+  --muted:#B8BED1;
+  --accent:#0051A2;          /* Blu Inter */
+  --accent2:#2FA4FF;         /* Azzurro CTA */
+  --gold:#F5C400;            /* Oro/Giallo */
+  --danger:#ff4d5a;
+  --ok:#2ee59d;
+  --border:rgba(255,255,255,.10);
+  --shadow: 0 10px 30px rgba(0,0,0,.45);
+  --shadowSoft: 0 14px 50px rgba(0,0,0,.40);
+  --radius:18px;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
+html,body{height:100%}
+body{
+  margin:0;
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+  background: var(--bg);
+}
+
+
+/* Evita selezioni accidentali che creano il "rettangolo azzurro" su mobile/desktop */
+body{ -webkit-user-select:none; user-select:none; }
+input, textarea, select{ -webkit-user-select:text; user-select:text; }
+
+.card, .quiz, .option__btn, .row, .grid, .grid2{ -webkit-user-select:none; user-select:none; }
+.option__btn:focus, .option__btn:focus-visible{ outline:none; box-shadow:none; }
+
+/* Riduce la "patina"/highlight azzurro da selezione testo su desktop */
+#memberList, #leaderboardList, #bookingList, #allowedEditorList{
+  -webkit-user-select:none;
+  user-select:none;
+}
+button:focus, button:focus-visible,
+input:focus, input:focus-visible,
+textarea:focus, textarea:focus-visible,
+select:focus, select:focus-visible{
+  outline:none;
+  box-shadow:none;
+}
+
+a{color:inherit}
+
+.topbar{
+  position:sticky; top:0; z-index:10;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 14px;
+  background: rgba(11,11,11,.78);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--border);
+}
+
+.brand{display:flex; gap:10px; align-items:center; user-select:none; cursor:pointer}
+.brand__logo{width:38px; height:38px; border-radius:12px; box-shadow: var(--shadow)}
+.brand__title{font-weight:800; letter-spacing:.2px}
+.brand__sub{font-size:12px; color:var(--muted); margin-top:2px}
+
+.topbar__right{display:flex; gap:10px; align-items:center}
+.badge{
+  font-size:12px;
+  padding:7px 10px;
+  background: rgba(255,255,255,.08);
+  border:1px solid var(--border);
+  border-radius:999px;
+  color:var(--muted);
+}
+
+.container{max-width:960px; margin:0 auto; padding:16px}
+
+.card{
+  background: var(--card);
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  padding:16px;
+  box-shadow: var(--shadowSoft);
+  position: relative;
+  overflow: hidden;
+}
+
+.card--blue{
+  border-color: rgba(0,81,162,.35);
+  box-shadow: 0 14px 50px rgba(0,0,0,.42), 0 0 0 1px rgba(0,81,162,.10) inset;
+}
+
+.card--warn{
+  border-color: rgba(255,196,0,.45);
+  box-shadow: 0 14px 50px rgba(0,0,0,.42), 0 0 0 1px rgba(255,196,0,.10) inset;
+}
+.card--warn code{ background: rgba(255,255,255,.06); padding: 2px 6px; border-radius: 8px; }
+
+.card--blue::before{
+  content:"";
+  display:block;
+  height:4px;
+  border-radius:999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  margin-bottom:12px;
+  opacity:.95;
+}
+
+.card--gold{
+  border-color: rgba(245,196,0,.35);
+  box-shadow: 0 14px 50px rgba(0,0,0,.42), 0 0 0 1px rgba(245,196,0,.10) inset;
+}
+.card--gold::before{
+  content:"";
+  display:block;
+  height:4px;
+  border-radius:999px;
+  background: linear-gradient(90deg, var(--gold), rgba(245,196,0,.65));
+  margin-bottom:12px;
+  opacity:.95;
+}
+
+.card + .card{margin-top:14px}
+
+h1{margin:0 0 6px 0; font-size:22px}
+h2{margin:0 0 10px 0; font-size:18px}
+h3{margin:0 0 8px 0; font-size:16px}
+
+.muted{color:var(--muted)}
+.small{font-size:12px}
+
+.field{display:block; margin:12px 0}
+.field > span{display:block; font-size:12px; color:var(--muted); margin-bottom:6px}
+input, textarea, select{
+  width:100%;
+  padding:12px 12px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+  outline:none;
+  transition: border-color .15s ease, background .15s ease, transform .15s ease;
+}
+input, textarea, select, button{
+  -webkit-appearance: none;
+  appearance: none;
+}
+input:focus, textarea:focus, select:focus{
+  border-color: rgba(255,255,255,.22);
+  background: rgba(0,0,0,.30);
+}
+
+/* Evita la "riga azzurra"/highlight su alcuni Android */
+:focus-visible{outline:none}
+
+/* Evita l'azzurro di selezione testo (soprattutto su Windows/Chrome) */
+::selection{background: rgba(0,0,0,0); color: inherit;}
+::-moz-selection{background: rgba(0,0,0,0); color: inherit;}
+
+/* Evita selezione accidentale su liste/bottoni */
+.item, button, .pill, .brand { -webkit-user-select:none; user-select:none; }
+textarea{min-height:92px; resize:vertical}
+input::placeholder, textarea::placeholder{color: rgba(233,239,255,.45)}
+
+.grid{display:grid; grid-template-columns: 1fr 1fr; gap:10px}
+.grid2{display:grid; grid-template-columns: 1fr 1fr; gap:10px}
+@media (max-width:640px){
+  .grid{grid-template-columns:1fr}
+  .grid2{grid-template-columns:1fr}
+}
+
+.row{display:flex; justify-content:space-between; gap:10px; align-items:center}
+
+button{
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.10);
+  color: var(--text);
+  padding:12px 12px;
+  border-radius:14px;
+  font-weight:700;
+  cursor:pointer;
+  transition: transform .08s ease, filter .15s ease, background .15s ease, border-color .15s ease;
+}
+button:hover{filter: brightness(1.06)}
+button:active{transform: translateY(1px)}
+button:disabled{opacity:.55; cursor:not-allowed; transform:none; filter:none}
+button\.primary{
+  background: linear-gradient(135deg, var(--accent), var(--accent2)); border-color: rgba(47,164,255,.35)}
+button.secondary{
+  background: rgba(255,255,255,.06);
+  border:1px solid var(--border);
+}
+.secondary:hover{filter: brightness(1.08)}
+
+button.primary{ 
+  background: linear-gradient(180deg, rgba(47,164,255,.26) 0%, rgba(47,164,255,.14) 100%);
+  border-color: rgba(47,164,255,.42);
+  box-shadow: 0 10px 26px rgba(47,164,255,.10);
+}
+button.danger{background: rgba(255,77,90,.16); border-color: rgba(255,77,90,.35)}
+button.ok{background: rgba(46,229,157,.14); border-color: rgba(46,229,157,.35)}
+button.ghost{
+  background: transparent;
+  border:1px solid rgba(255,255,255,.10);
+}
+
+
+/* Biglietteria */
+.ticketCard{
+  padding: 14px 14px;
+  background: var(--card);
+}
+
+.ticketRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.ticketTitle{font-weight:900; font-size:16px; letter-spacing:.2px}
+.ticketSub{margin-top:2px}
+.ticketBtn{
+  min-width: 180px;
+  border-radius: 999px;
+  padding: 12px 14px;
+  border-color: rgba(47,164,255,.45);
+  background: linear-gradient(180deg, rgba(47,164,255,.26) 0%, rgba(47,164,255,.14) 100%);
+  box-shadow: 0 10px 22px rgba(47,164,255,.10);
+}
+@media (max-width:640px){
+  .ticketRow{flex-direction:column; align-items:stretch}
+  .ticketBtn{width:100%; min-width:0}
+}
+
+.kpis{display:grid; grid-template-columns: 1fr 1fr 1fr; gap:10px; margin-top:10px}
+@media (max-width:640px){.kpis{grid-template-columns:1fr}}
+.kpi{background: rgba(0,0,0,.22); border:1px solid var(--border); border-radius:16px; padding:12px}
+.kpi__label{font-size:12px; color:var(--muted)}
+.kpi__value{font-size:22px; font-weight:900; margin-top:4px}
+
+.pill{
+  font-size:12px;
+  padding:8px 10px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.05);
+  color: var(--text);
+}
+.pill--blue{border-color: rgba(0,81,162,.35); background: rgba(0,81,162,.15)}
+.pill--gold{border-color: rgba(245,196,0,.35); background: rgba(245,196,0,.16); color: var(--gold)}
+
+
+.divider{height:1px; background: var(--border); margin:14px 0}
+
+.list{display:flex; flex-direction:column; gap:10px}
+.item{background: rgba(0,0,0,.18); border:1px solid var(--border); border-radius:16px; padding:12px}
+.item__title{font-weight:900; margin-bottom:6px}
+.item__meta{font-size:12px; color:var(--muted)}
+
+/* Admin: editor rapido tessere */
+.adminEditHead{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px}
+.adminEditTitle{font-weight:900}
+.adminEditName input{width:100%}
+.adminEditActions{display:flex; gap:8px; margin-top:10px}
+.adminEditActions button{width:100%}
+
+/* Evita selezioni accidentali (l'effetto "azzurro") su liste e pulsanti */
+.item, button, .pill, .brand{
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.notice{padding:12px; border-radius:16px; border:1px dashed rgba(255,255,255,.25); background: rgba(0,0,0,.18)}
+
+.toast{
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,.75);
+  border:1px solid rgba(255,255,255,.20);
+  color: var(--text);
+  padding: 12px 14px;
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  max-width: 92vw;
+  font-weight: 700;
+}
+
+/* =============================
+   iOS Install Modal
+   ============================= */
+.modal{position:fixed; inset:0; z-index:9999; display:flex; align-items:flex-end; justify-content:center; padding:14px}
+.modal__backdrop{position:absolute; inset:0; background: rgba(0,0,0,.55); backdrop-filter: blur(4px)}
+.modal__card{
+  position:relative;
+  width:min(560px, 100%);
+  border-radius: 22px;
+  border:1px solid rgba(255,255,255,.16);
+  background: linear-gradient(180deg, rgba(15,33,71,.96) 0%, rgba(8,18,38,.96) 100%);
+  box-shadow: 0 22px 70px rgba(0,0,0,.55);
+  overflow:hidden;
+}
+.modal__head{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 14px 10px 14px; border-bottom:1px solid rgba(255,255,255,.10)}
+.modal__kicker{font-size:12px; color:var(--muted); font-weight:800; letter-spacing:.2px}
+.modal__title{font-size:18px; font-weight:900; margin-top:2px}
+.modal__body{padding:14px}
+.steps{display:flex; flex-direction:column; gap:10px}
+.step{display:flex; gap:10px; align-items:flex-start; padding:12px; border-radius:18px; border:1px solid rgba(255,255,255,.10); background: rgba(0,0,0,.16)}
+.step__icon{width:36px; height:36px; border-radius:14px; display:flex; align-items:center; justify-content:center; background: rgba(47,164,255,.16); border:1px solid rgba(47,164,255,.30); flex:0 0 auto}
+.step__title{font-weight:900}
+.modal__note{margin-top:12px}
+.modal__dontshow{display:flex; gap:10px; align-items:center; margin-top:10px}
+.modal__dontshow input{width:auto; accent-color: var(--accent)}
+.modal__actions{margin-top:12px; display:flex; gap:10px}
+.modal__actions button{width:100%}
+
+@media (min-width: 641px){
+  .modal{align-items:center}
+}
+
+/* Quiz */
+.quiz{display:flex; flex-direction:column; gap:10px}
+.option__btn{
+  text-align:left;
+  display:block;
+  width:100%;
+  background: rgba(0,0,0,.18);
+  border:1px solid var(--border);
+}
+.option__btn.selected{border-color: rgba(47,164,255,.55); background: rgba(47,164,255,.14)}
+.option__btn.correct{border-color: rgba(46,229,157,.55); background: rgba(46,229,157,.14)}
+
+/* =============================
+   Admin compact mode
+   ============================= */
+body.is-admin .container{padding:12px}
+body.is-admin #viewAdmin.card{padding:12px}
+body.is-admin #viewAdmin h1{font-size:20px}
+body.is-admin #viewAdmin h3{margin:0 0 6px 0}
+body.is-admin #viewAdmin .divider{margin:12px 0}
+body.is-admin #viewAdmin .field{margin:10px 0}
+body.is-admin #viewAdmin input,
+body.is-admin #viewAdmin textarea,
+body.is-admin #viewAdmin select{padding:10px 11px; border-radius:12px}
+body.is-admin #viewAdmin button{padding:10px 11px; border-radius:12px}
+body.is-admin #viewAdmin button.ghost{padding:6px 10px}
+body.is-admin #viewAdmin .list{gap:8px}
+body.is-admin #viewAdmin .item{padding:10px; border-radius:14px}
+
+.option__btn.wrong{border-color: rgba(255,77,90,.55); background: rgba(255,77,90,.12)}
+.option__btn:disabled{opacity:.85; cursor:not-allowed}
+
+.okBadge{color: var(--text); background: rgba(46,229,157,.14); border-color: rgba(46,229,157,.35)}
+.points{
+  min-width:88px;
+  padding:10px 12px;
+  border-radius: 16px;
+  background: rgba(245,196,0,.16);
+  border: 1px solid rgba(245,196,0,.30);
+  box-shadow: 0 10px 20px rgba(0,0,0,.28);
+  text-align:right;
+}
+
+.points__label{font-size:12px; color: rgba(245,196,0,.95)}
+.points__value{font-size:22px; font-weight:900; color: var(--gold); line-height:1.0}
+
+/* =============================
+   iOS Install Modal
+   ============================= */
+.modal{position:fixed; inset:0; z-index:50; display:flex; align-items:flex-end; justify-content:center; padding:16px;}
+.modal__backdrop{position:absolute; inset:0; background: rgba(0,0,0,.55); backdrop-filter: blur(6px);}
+.modal__card{
+  position:relative;
+  width:min(560px, 96vw);
+  border-radius: 22px;
+  border:1px solid rgba(255,255,255,.16);
+  background: linear-gradient(180deg, rgba(15,33,71,.98) 0%, rgba(8,18,38,.96) 100%);
+  box-shadow: var(--shadowSoft);
+  overflow:hidden;
+}
+.modal__head{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 14px 10px 14px; border-bottom:1px solid rgba(255,255,255,.10)}
+.modal__kicker{font-size:12px; color: rgba(233,239,255,.62); letter-spacing:.2px}
+.modal__title{font-size:16px; font-weight:900; margin-top:2px}
+.modal__body{padding:14px}
+.steps{display:flex; flex-direction:column; gap:10px}
+.step{display:flex; gap:12px; padding:12px; border-radius:18px; border:1px solid rgba(255,255,255,.10); background: rgba(0,0,0,.18)}
+.step__icon{width:42px; height:42px; border-radius:14px; display:flex; align-items:center; justify-content:center;
+  background: rgba(0,81,162,.18);
+  border:1px solid rgba(47,164,255,.25);
+  box-shadow: 0 10px 20px rgba(0,0,0,.22);
+}
+.step__title{font-weight:900}
+.modal__note{margin-top:12px}
+.modal__dontshow{display:flex; gap:10px; align-items:center; margin-top:12px}
+.modal__dontshow input{width:18px; height:18px}
+.modal__actions{margin-top:14px}
+.modal__actions button{width:100%; border-radius:16px}
+@media (min-width: 641px){
+  .modal{align-items:center;}
+}
+
+
+/* ===== Grafica Plus (v6) ===== */
+body{
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+}
+
+
+header{
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: linear-gradient(90deg, rgba(0,0,0,.25), rgba(15,33,71,.18));
+  border-bottom: 1px solid rgba(255,255,255,.10);
+}
+
+.card{
+  background: linear-gradient(180deg, var(--glass), rgba(0,0,0,.05));
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: var(--shadowSoft);
+}
+
+h1,h2,h3{
+  letter-spacing: .2px;
+}
+
+button, .btn{
+  border-radius: 16px;
+  transition: transform .06s ease, filter .18s ease;
+  outline: none;
+}
+
+button:active{
+  transform: translateY(1px);
+}
+
+.primary{
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 10px 30px rgba(0,0,0,.28);
+}
+
+.secondary{
+  background: linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+  border: 1px solid rgba(255,255,255,.12);
+}
+
+.ghost{
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.10);
+}
+
+button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0,210,255,.22);
+  border-color: rgba(0,210,255,.45);
+}
+
+::selection{
+  background: rgba(0,210,255,.18);
+  color: var(--text);
+}
+
+/* Bacheca */
+.bulletin{
+  padding: 12px 12px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.06));
+  border: 1px solid rgba(255,255,255,.10);
+}
+.bulletLine{
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.03);
+  margin: 8px 0;
+}
+
+/* Riduce ancora i rettangoli azzurri su mobile */
+a, button, input, textarea, select{
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
